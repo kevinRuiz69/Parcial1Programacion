@@ -1,2 +1,6 @@
-public enum TipoProducto {
+public enum TIPOPRODUCTO {
+ALIMENTOS,
+    BEBIDAS,
+    PRODUCTOSASEO,
+    CUIDADOPERSONAL
 }
