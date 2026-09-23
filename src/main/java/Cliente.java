@@ -1,4 +1,5 @@
-import java.util.list;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Cliente {
@@ -8,7 +9,7 @@ public class Cliente {
     private String correoElectronico;
 
     // RELACION CON FACTURA
-    private list<Factura>listaFactura;
+    private List<Factura> listaFactura;
     // RELACION CON MARKETPLUS
     private MarketPlus marketPlus;
 
@@ -19,7 +20,7 @@ public class Cliente {
         this.documentoIdentidad = documentoIdentidad;
         this.telefono = telefono;
         this.correoElectronico = correoElectronico;
-        this.listaFactura= new
+        this.listaFactura= new ArrayList<>();
         this.marketPlus= marketPlus;
     }
 
@@ -57,11 +58,11 @@ public class Cliente {
         this.correoElectronico = correoElectronico;
     }
 
-    public list<Factura> getListaFactura() {
+    public List<Factura> getListaFactura() {
         return listaFactura;
     }
 
-    public void setListaFactura(list<Factura> listaFactura) {
+    public void setListaFactura(List<Factura> listaFactura) {
         this.listaFactura = listaFactura;
     }
 
