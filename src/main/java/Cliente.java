@@ -1,4 +1,6 @@
-import java.util.list;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Cliente {
@@ -19,7 +21,7 @@ public class Cliente {
         this.documentoIdentidad = documentoIdentidad;
         this.telefono = telefono;
         this.correoElectronico = correoElectronico;
-        this.listaFactura= new
+        this.listaFactura= new Arraylist<>();
         this.marketPlus= marketPlus;
     }
 
