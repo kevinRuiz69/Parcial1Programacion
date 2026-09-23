@@ -3,7 +3,7 @@ public class Producto {
     //atributos
     private String codigoProducto;
     private String nombre;
-    private double precioUnitario;
+    private float precioUnitario;
     private int cantidadDisponible;
 
     //RELACION DE CURSO CON MODALIDAD
@@ -11,7 +11,7 @@ public class Producto {
 
 
     //Constructor
-    public Producto(String codigoProducto, String nombre, double precioUnitario, int cantidadDisponible, TipoProducto tipoProducto) {
+    public Producto(String codigoProducto, String nombre, float precioUnitario, int cantidadDisponible, TipoProducto tipoProducto) {
         this.codigoProducto = codigoProducto;
         this.nombre = nombre;
         this.precioUnitario = precioUnitario;
@@ -37,11 +37,11 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public double getPrecioUnitario() {
+    public float getPrecioUnitario() {
         return precioUnitario;
     }
 
-    public void setPrecioUnitario(double precioUnitario) {
+    public void setPrecioUnitario(float precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
 
