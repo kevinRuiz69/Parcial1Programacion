@@ -35,7 +35,6 @@ public class DetalleFactura {
         public float getSubTotal() {
             return subTotal;
         }
-        // No hay setSubTotal(): el subtotal siempre se deriva, nunca se asigna directo.
 
         public Producto getProducto() {
             return producto;
