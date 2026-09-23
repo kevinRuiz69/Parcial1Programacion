@@ -6,18 +6,21 @@ public class Producto {
     private double precioUnitario;
     private int cantidadDisponible;
 
+    //RELACION DE CURSO CON MODALIDAD
+    private TipoProducto tipoProducto;
+
 
     //Constructor
-    public Producto(String codigoProducto, double precioUnitario, String nombre, int cantidadDisponible) {
+    public Producto(String codigoProducto, String nombre, double precioUnitario, int cantidadDisponible, TipoProducto tipoProducto) {
         this.codigoProducto = codigoProducto;
-        this.precioUnitario = precioUnitario;
         this.nombre = nombre;
+        this.precioUnitario = precioUnitario;
         this.cantidadDisponible = cantidadDisponible;
+        this.tipoProducto = tipoProducto;
     }
 
+
     //getters y setters
-
-
     public String getCodigoProducto() {
         return codigoProducto;
     }
@@ -50,14 +53,22 @@ public class Producto {
         this.cantidadDisponible = cantidadDisponible;
     }
 
+    public TipoProducto getTipoProducto() {
+        return tipoProducto;
+    }
 
+    public void setTipoProducto(TipoProducto tipoProducto) {
+        this.tipoProducto = tipoProducto;
+    }
 
     //override
+
     @Override
     public String toString() {
         return "codigoProducto='" + codigoProducto +
-                ", nombre='" + nombre +
-                ", precioUnitario=" + precioUnitario +
-                ", cantidadDisponible=" + cantidadDisponible;
+                ", nombre: " + nombre +
+                ", precioUnitario: " + precioUnitario +
+                ", cantidadDisponible: " + cantidadDisponible +
+                ", tipoProducto: " + tipoProducto;
     }
 }
