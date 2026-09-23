@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+import java.time.LocalDate;
+=======
+>>>>>>> master
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +24,11 @@ public class Cliente {
         this.documentoIdentidad = documentoIdentidad;
         this.telefono = telefono;
         this.correoElectronico = correoElectronico;
+<<<<<<< HEAD
+        this.listaFactura= new Arraylist<>();
+=======
         this.listaFactura= new ArrayList<>();
+>>>>>>> master
         this.marketPlus= marketPlus;
     }
 
