@@ -3,4 +3,5 @@ ALIMENTOS,
     BEBIDAS,
     PRODUCTOSASEO,
     CUIDADOPERSONAL
+public enum TipoProducto {
 }
