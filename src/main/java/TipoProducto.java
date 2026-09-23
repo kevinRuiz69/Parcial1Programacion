@@ -2,7 +2,6 @@ public enum TipoProducto {
 ///.
     ALIMENTOS,
     BEBIDAS,
-    PRODUCTOASEO,
+    PRODUCTOSASEO,
     CUIDADOPERSONAL
-
 }
