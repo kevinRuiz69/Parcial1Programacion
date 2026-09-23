@@ -1,27 +1,20 @@
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Cliente {
     private String nombre;
     private String documentoIdentidad;
     private String telefono;
     private String correoElectronico;
-
-    // RELACION CON FACTURA
     private List<Factura> listaFactura;
-    // RELACION CON MARKETPLUS
-    private MarketPlus marketPlus;
-
 
     // CONSTRUCTOR
-    public Cliente(String nombre, String documentoIdentidad, String telefono, String correoElectronico,MarketPlus marketPlus) {
+    public Cliente(String nombre, String documentoIdentidad, String telefono, String correoElectronico) {
         this.nombre = nombre;
         this.documentoIdentidad = documentoIdentidad;
         this.telefono = telefono;
         this.correoElectronico = correoElectronico;
-        this.listaFactura= new ArrayList<>();
-        this.marketPlus= marketPlus;
+        this.listaFactura = new ArrayList<>();
     }
 
     // GETTERS Y SETTERS
@@ -66,12 +59,8 @@ public class Cliente {
         this.listaFactura = listaFactura;
     }
 
-    public MarketPlus getMarketPlus() {
-        return marketPlus;
-    }
-
-    public void setMarketPlus(MarketPlus marketPlus) {
-        this.marketPlus = marketPlus;
+    public void agregarFactura(Factura factura) {
+        listaFactura.add(factura);
     }
 
     @java.lang.Override
@@ -81,8 +70,7 @@ public class Cliente {
                 ", documentoIdentidad='" + documentoIdentidad +
                 ", telefono='" + telefono +
                 ", correoElectronico='" + correoElectronico +
-                ", listaFactura='"+ listaFactura+
-                ", marketPlus='"+marketPlus+
+                ", cantidadFacturas=" + listaFactura.size() +
                 '}';
     }
 }

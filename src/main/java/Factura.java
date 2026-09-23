@@ -5,21 +5,20 @@ import java.util.List;
 public class Factura {
 
     //atributos
-    private String codigoProducto;
+    private String codigoCompra;
     private LocalDate fechaRealizacion;
-    private double valorTotal;
 
     //RELACION DE FACTURA CON METODOPAGO
     private MetodoPago metodoPago;
+    private Cliente cliente;
 
     //RELACION DE FACTURA CON DETALLEFACTURA
     private List<DetalleFactura> listaDetalleFactura;
 
     //constructor
-    public Factura(String codigoProducto, LocalDate fechaRealizacion, double valorTotal, MetodoPago metodoPago) {
-        this.codigoProducto = codigoProducto;
+    public Factura(String codigoCompra, LocalDate fechaRealizacion, MetodoPago metodoPago) {
+        this.codigoCompra = codigoCompra;
         this.fechaRealizacion = fechaRealizacion;
-        this.valorTotal = valorTotal;
         this.metodoPago = metodoPago;
         this.listaDetalleFactura = new ArrayList<>();
     }
@@ -33,12 +32,18 @@ public class Factura {
         this.metodoPago = metodoPago;
     }
 
-    public double getValorTotal() {
-        return valorTotal;
+    public float getValorTotal() {
+        return calcularValorTotal();
     }
 
-    public void setValorTotal(double valorTotal) {
-        this.valorTotal = valorTotal;
+    public float calcularValorTotal() {
+        float valorTotal = 0;
+
+        for (DetalleFactura detalle : listaDetalleFactura) {
+            valorTotal += detalle.getSubTotal();
+        }
+
+        return valorTotal;
     }
 
     public LocalDate getFechaRealizacion() {
@@ -49,32 +54,37 @@ public class Factura {
         this.fechaRealizacion = fechaRealizacion;
     }
 
-    public String getCodigoProducto() {
-        return codigoProducto;
+    public String getCodigoCompra() {
+        return codigoCompra;
     }
 
-    public void setCodigoProducto(String codigoProducto) {
-        this.codigoProducto = codigoProducto;
+    public void setCodigoCompra(String codigoCompra) {
+        this.codigoCompra = codigoCompra;
     }
 
     public List<DetalleFactura> getListaDetalleFactura() {
         return listaDetalleFactura;
     }
 
-    public void setListaDetalleFactura(List<DetalleFactura> listaDetalleFactura) {
-        this.listaDetalleFactura = listaDetalleFactura;
+    public void agregarDetalle(DetalleFactura detalleFactura) {
+        listaDetalleFactura.add(detalleFactura);
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
 
-    //override
-
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
     @Override
     public String toString() {
-        return "codigoProducto: " + codigoProducto +
+        return "codigoCompra: " + codigoCompra +
                 ", fechaRealizacion: " + fechaRealizacion +
-                ", valorTotal: " + valorTotal +
+                ", valorTotal: " + getValorTotal() +
                 ", metodoPago: " + metodoPago +
+                ", cliente: " + (cliente != null ? cliente.getNombre() : "sin cliente") +
                 ", listaDetalleFactura: " + listaDetalleFactura;
     }
 }
