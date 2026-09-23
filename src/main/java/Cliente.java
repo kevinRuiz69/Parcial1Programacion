@@ -14,7 +14,7 @@ public class Cliente {
 
 
     // CONSTRUCTOR
-    public Cliente(String nombre, String documentoIdentidad, String telefono, String correoElectronico) {
+    public Cliente(String nombre, String documentoIdentidad, String telefono, String correoElectronico,MarketPlus marketPlus) {
         this.nombre = nombre;
         this.documentoIdentidad = documentoIdentidad;
         this.telefono = telefono;
@@ -57,6 +57,22 @@ public class Cliente {
         this.correoElectronico = correoElectronico;
     }
 
+    public list<Factura> getListaFactura() {
+        return listaFactura;
+    }
+
+    public void setListaFactura(list<Factura> listaFactura) {
+        this.listaFactura = listaFactura;
+    }
+
+    public MarketPlus getMarketPlus() {
+        return marketPlus;
+    }
+
+    public void setMarketPlus(MarketPlus marketPlus) {
+        this.marketPlus = marketPlus;
+    }
+
     @java.lang.Override
     public String toString() {
         return
@@ -64,6 +80,8 @@ public class Cliente {
                 ", documentoIdentidad='" + documentoIdentidad +
                 ", telefono='" + telefono +
                 ", correoElectronico='" + correoElectronico +
+                ", listaFactura='"+ listaFactura+
+                ", marketPlus='"+marketPlus+
                 '}';
     }
 }
