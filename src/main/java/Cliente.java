@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ public class Cliente {
     private String telefono;
     private String correoElectronico;
     private List<Factura> listaFactura;
+  private MarketPlus marketplus;
 
     // CONSTRUCTOR
     public Cliente(String nombre, String documentoIdentidad, String telefono, String correoElectronico) {
@@ -15,6 +17,7 @@ public class Cliente {
         this.telefono = telefono;
         this.correoElectronico = correoElectronico;
         this.listaFactura = new ArrayList<>();
+        this.marketPlus= marketPlus;
     }
 
     // GETTERS Y SETTERS
