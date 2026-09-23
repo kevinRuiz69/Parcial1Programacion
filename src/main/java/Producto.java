@@ -3,22 +3,19 @@ public class Producto {
     //atributos
     private String codigoProducto;
     private String nombre;
+    private TipoProducto categoria;
     private float precioUnitario;
     private int cantidadDisponible;
 
-    //RELACION DE CURSO CON MODALIDAD
-    private TipoProducto tipoProducto;
-
-
     //Constructor
-    public Producto(String codigoProducto, String nombre, float precioUnitario, int cantidadDisponible, TipoProducto tipoProducto) {
+    public Producto(String codigoProducto, String nombre, TipoProducto categoria, float precioUnitario,
+                    int cantidadDisponible) {
         this.codigoProducto = codigoProducto;
         this.nombre = nombre;
+        this.categoria = categoria;
         this.precioUnitario = precioUnitario;
         this.cantidadDisponible = cantidadDisponible;
-        this.tipoProducto = tipoProducto;
     }
-
 
     //getters y setters
     public String getCodigoProducto() {
@@ -37,6 +34,14 @@ public class Producto {
         this.nombre = nombre;
     }
 
+    public TipoProducto getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(TipoProducto categoria) {
+        this.categoria = categoria;
+    }
+
     public float getPrecioUnitario() {
         return precioUnitario;
     }
@@ -53,12 +58,14 @@ public class Producto {
         this.cantidadDisponible = cantidadDisponible;
     }
 
-    public TipoProducto getTipoProducto() {
-        return tipoProducto;
+    public boolean hayDisponibilidad(int cantidad) {
+        return cantidad > 0 && cantidad <= cantidadDisponible;
     }
 
-    public void setTipoProducto(TipoProducto tipoProducto) {
-        this.tipoProducto = tipoProducto;
+    public void actualizarCantidadDisponible(int cantidad) {
+        if (hayDisponibilidad(cantidad)) {
+            cantidadDisponible -= cantidad;
+        }
     }
 
     //override
@@ -67,8 +74,8 @@ public class Producto {
     public String toString() {
         return "codigoProducto='" + codigoProducto +
                 ", nombre: " + nombre +
+                ", categoria: " + categoria +
                 ", precioUnitario: " + precioUnitario +
-                ", cantidadDisponible: " + cantidadDisponible +
-                ", tipoProducto: " + tipoProducto;
+                ", cantidadDisponible: " + cantidadDisponible;
     }
 }
