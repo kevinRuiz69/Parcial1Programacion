@@ -59,7 +59,10 @@ public class Producto {
     }
 
     public boolean hayDisponibilidad(int cantidad) {
-        return cantidad > 0 && cantidad <= cantidadDisponible;
+        if(cantidad > 0 && cantidad <= cantidadDisponible) {
+            return true;
+        }
+        return false;
     }
 
     public void actualizarCantidadDisponible(int cantidad) {

@@ -5,10 +5,23 @@ import java.util.List;
 
 public class Aplicacion {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
 
+    {
         // Menú interactivo
         MarketPlus supermercado = new MarketPlus("MarketPlus Central", "Calle 10 #15-20", "3001234567");
+
+        // CREAR PRODUCTO
+        Producto producto1 = new Producto("PT32", "frijoles", TipoProducto.ALIMENTOS, 5000, 15);
+        Producto producto2 = new Producto("PS67", "gaseosa", "TipoProducto.BEBIDAS", 6500, 35);
+        Producto producto3 = new Producto("PN45", "limpido", " tipoProducto.PRODUCTOASEO", 5500, 12);
+        Producto producto4 = new Producto("PS24", "shampoo", "tipoProducto.CUIDADOPERSONAL", 13000, 20);
+
+        // CREAR CLIENTE
+        Cliente cliente1 = new Cliente("Pedro Martinez", "1945485954", "3854935738", "pedrom@gmail.com");
+        Cliente cliente2= new Cliente( "Carlos Perez","385673824","3747285392","carlosp@gmail.com");
+        Cliente cliente3= new Cliente("Sara Guzman","28574826347","3657482943","sarag@gmail.com");
+        Cliente cliente4= new Cliente("Daniela Gallego","41939312","34721325463","danielag@gmial.com");
 
         int opcion;
         do {
@@ -88,13 +101,12 @@ public class Aplicacion {
 
                     String codProducto = JOptionPane.showInputDialog("Código del producto:");
                     String nomProducto = JOptionPane.showInputDialog("Nombre del producto:");
-                    double precio = Double.parseDouble(JOptionPane.showInputDialog("Precio unitario:"));
+                    float precio = Float.parseFloat(JOptionPane.showInputDialog("Precio unitario:"));
                     int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Cantidad disponible:"));
-
                     String catStr = JOptionPane.showInputDialog("Categoría (ALIMENTOS, BEBIDAS, PRODUCTOSASEO, CUIDADOPERSONAL):");
                     TipoProducto categoria = TipoProducto.valueOf(catStr.toUpperCase());
 
-                    Producto producto = new Producto(codProducto, nomProducto, precio, cantidad, categoria);
+                    Producto producto = new Producto(codProducto, nomProducto, categoria, precio, cantidad );
 
                     if (supermercado.agregarProducto(producto)) {
                         JOptionPane.showMessageDialog(null, "Producto agregado correctamente.");
@@ -184,7 +196,7 @@ public class Aplicacion {
 
                     if (cliHistorial != null) {
                         String historialStr = "Compras realizadas por: " + cliHistorial.getNombre() + "\n";
-                        for (Factura f : cliHistorial.getListaFacturas()) {
+                        for (Factura f : cliHistorial.getListaFactura()) {
                             historialStr += "- Código: " + f.getCodigoCompra() + " | Fecha: " + f.getFechaRealizacion() + " | Total: $" + f.getValorTotal() + "\n";
                         }
                         JOptionPane.showMessageDialog(null, historialStr);
