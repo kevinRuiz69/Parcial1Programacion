@@ -16,7 +16,9 @@ public class Aplicacion {
 
     // CREAR CLIENTE
     Cliente cliente1 = new Cliente("Pedro Martinez", "1945485954", "3854935738", "pedrom@gmail.com");
-
+    Cliente cliente2= new Cliente( "Carlos Perez","385673824","3747285392","carlosp@gmail.com");
+    Cliente cliente3= new Cliente("Sara Guzman","28574826347","3657482943","sarag@gmail.com");
+    Cliente cliente4= new Cliente("Daniela Gallego","41939312",)
     {
 
         // Menú interactivo
