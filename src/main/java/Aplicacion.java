@@ -13,15 +13,25 @@ public class Aplicacion {
 
         // CREAR PRODUCTO
         Producto producto1 = new Producto("PT32", "frijoles", TipoProducto.ALIMENTOS, 5000, 15);
-        Producto producto2 = new Producto("PS67", "gaseosa", "TipoProducto.BEBIDAS", 6500, 35);
-        Producto producto3 = new Producto("PN45", "limpido", " tipoProducto.PRODUCTOASEO", 5500, 12);
-        Producto producto4 = new Producto("PS24", "shampoo", "tipoProducto.CUIDADOPERSONAL", 13000, 20);
+        Producto producto2 = new Producto("PS67", "gaseosa", TipoProducto.BEBIDAS, 6500, 35);
+        Producto producto3 = new Producto("PN45", "limpido",  TipoProducto.PRODUCTOSASEO, 5500, 12);
+        Producto producto4 = new Producto("PS24", "shampoo", TipoProducto.CUIDADOPERSONAL, 13000, 20);
+        // AGREGAR
+        supermercado.agregarProducto(producto1);
+        supermercado.agregarProducto(producto2);
+        supermercado.agregarProducto(producto3);
+        supermercado.agregarProducto(producto4);
 
         // CREAR CLIENTE
         Cliente cliente1 = new Cliente("Pedro Martinez", "1945485954", "3854935738", "pedrom@gmail.com");
         Cliente cliente2= new Cliente( "Carlos Perez","385673824","3747285392","carlosp@gmail.com");
         Cliente cliente3= new Cliente("Sara Guzman","28574826347","3657482943","sarag@gmail.com");
         Cliente cliente4= new Cliente("Daniela Gallego","41939312","34721325463","danielag@gmial.com");
+        //AGREGA
+    supermercado.agregarCliente(cliente1);
+        supermercado.agregarCliente(cliente2);
+        supermercado.agregarCliente(cliente3);
+        supermercado.agregarCliente(cliente4);
 
         int opcion;
         do {
