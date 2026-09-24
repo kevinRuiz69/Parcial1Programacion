@@ -5,7 +5,19 @@ import java.util.List;
 
 public class Aplicacion {
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
+
+
+    // CREAR PRODUCTO
+    Producto producto1 = new Producto("PT32", "frijoles", TipoProducto.ALIMENTOS, 5000, 15);
+    Producto producto2 = new Producto("PS67", "gaseosa", "TipoProducto.BEBIDAS", 6500, 35);
+    Producto producto3 = new Producto("PN45", "limpido", " tipoProducto.PRODUCTOASEO", 5500, 12);
+    Producto producto4 = new Producto("PS24", "shampoo", "tipoProducto.CUIDADOPERSONAL", 13000, 20);
+
+    // CREAR CLIENTE
+    Cliente cliente1 = new Cliente("Pedro Martinez", "1945485954", "3854935738", "pedrom@gmail.com");
+
+    {
 
         // Menú interactivo
         MarketPlus supermercado = new MarketPlus("MarketPlus Central", "Calle 10 #15-20", "3001234567");
