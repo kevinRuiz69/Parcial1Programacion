@@ -8,8 +8,8 @@ public class Producto {
     private int cantidadDisponible;
 
     //Constructor
-    public Producto(String codigoProducto, String nombre, TipoProducto categoria, float precioUnitario,
-                    int cantidadDisponible) {
+    public Producto(String codigoProducto, String nombre, double categoria, float precioUnitario,
+                    TipoProducto cantidadDisponible) {
         this.codigoProducto = codigoProducto;
         this.nombre = nombre;
         this.categoria = categoria;

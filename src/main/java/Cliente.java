@@ -17,7 +17,7 @@ public class Cliente {
         this.telefono = telefono;
         this.correoElectronico = correoElectronico;
         this.listaFactura = new ArrayList<>();
-        this.marketPlus= marketPlus;
+        this.marketplus= marketplus;
     }
 
     // GETTERS Y SETTERS
