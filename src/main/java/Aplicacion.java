@@ -88,13 +88,12 @@ public class Aplicacion {
 
                     String codProducto = JOptionPane.showInputDialog("Código del producto:");
                     String nomProducto = JOptionPane.showInputDialog("Nombre del producto:");
-                    double precio = Double.parseDouble(JOptionPane.showInputDialog("Precio unitario:"));
+                    float precio = Float.parseFloat(JOptionPane.showInputDialog("Precio unitario:"));
                     int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Cantidad disponible:"));
-
                     String catStr = JOptionPane.showInputDialog("Categoría (ALIMENTOS, BEBIDAS, PRODUCTOSASEO, CUIDADOPERSONAL):");
                     TipoProducto categoria = TipoProducto.valueOf(catStr.toUpperCase());
 
-                    Producto producto = new Producto(codProducto, nomProducto, precio, cantidad, categoria);
+                    Producto producto = new Producto(codProducto, nomProducto, categoria, precio, cantidad );
 
                     if (supermercado.agregarProducto(producto)) {
                         JOptionPane.showMessageDialog(null, "Producto agregado correctamente.");
@@ -184,7 +183,7 @@ public class Aplicacion {
 
                     if (cliHistorial != null) {
                         String historialStr = "Compras realizadas por: " + cliHistorial.getNombre() + "\n";
-                        for (Factura f : cliHistorial.getListaFacturas()) {
+                        for (Factura f : cliHistorial.getListaFactura()) {
                             historialStr += "- Código: " + f.getCodigoCompra() + " | Fecha: " + f.getFechaRealizacion() + " | Total: $" + f.getValorTotal() + "\n";
                         }
                         JOptionPane.showMessageDialog(null, historialStr);
