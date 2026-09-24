@@ -190,10 +190,38 @@ public class MarketPlus {
     // METODOS DE NEGOCIO
     public Factura registrarCompra(Cliente cliente, String codigoCompra, LocalDate fechaRealizacion,
                                    MetodoPago metodoPago, List<Producto> productos, List<Integer> cantidades) {
-        return null;
+        // Cada producto valida su propia cantidad disponible.
+        for (int i = 0; i < productos.size(); i++) {
+            Producto producto = productos.get(i);
+            int cantidadPedida = cantidades.get(i);
+
+            if (!producto.hayDisponibilidad(cantidadPedida)) {
+                return null;
+            }
+        }
+
+        Factura factura = new Factura(codigoCompra, fechaRealizacion, metodoPago);
+        factura.setCliente(cliente);
+
+        for (int i = 0; i < productos.size(); i++) {
+            Producto producto = productos.get(i);
+            int cantidad = cantidades.get(i);
+            factura.agregarDetalle(new DetalleFactura(cantidad, producto));
+            producto.actualizarCantidadDisponible(cantidad);
+        }
+
+        agregarFactura(factura);
+        cliente.agregarFactura(factura);
+        return factura;
     }
 
     public float obtenerVentasPorFecha(LocalDate fecha) {
-        return 0;
+        float ventasPorFecha = 0;
+        for (Factura factura : listaFacturas) {
+            if (factura.getFechaRealizacion().equals(fecha)) {
+                ventasPorFecha += factura.getValorTotal();
+            }
+        }
+        return ventasPorFecha;
     }
 }
