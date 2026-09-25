@@ -13,15 +13,25 @@ public class Aplicacion {
 
         // CREAR PRODUCTO
         Producto producto1 = new Producto("PT32", "frijoles", TipoProducto.ALIMENTOS, 5000, 15);
-        Producto producto2 = new Producto("PS67", "gaseosa", "TipoProducto.BEBIDAS", 6500, 35);
-        Producto producto3 = new Producto("PN45", "limpido", " tipoProducto.PRODUCTOASEO", 5500, 12);
-        Producto producto4 = new Producto("PS24", "shampoo", "tipoProducto.CUIDADOPERSONAL", 13000, 20);
+        Producto producto2 = new Producto("PS67", "gaseosa", TipoProducto.BEBIDAS, 6500, 35);
+        Producto producto3 = new Producto("PN45", "limpido",  TipoProducto.PRODUCTOSASEO, 5500, 12);
+        Producto producto4 = new Producto("PS24", "shampoo", TipoProducto.CUIDADOPERSONAL, 13000, 20);
+        // AGREGAR
+        supermercado.agregarProducto(producto1);
+        supermercado.agregarProducto(producto2);
+        supermercado.agregarProducto(producto3);
+        supermercado.agregarProducto(producto4);
 
         // CREAR CLIENTE
         Cliente cliente1 = new Cliente("Pedro Martinez", "1945485954", "3854935738", "pedrom@gmail.com");
         Cliente cliente2= new Cliente( "Carlos Perez","385673824","3747285392","carlosp@gmail.com");
         Cliente cliente3= new Cliente("Sara Guzman","28574826347","3657482943","sarag@gmail.com");
         Cliente cliente4= new Cliente("Daniela Gallego","41939312","34721325463","danielag@gmial.com");
+        //AGREGA
+    supermercado.agregarCliente(cliente1);
+        supermercado.agregarCliente(cliente2);
+        supermercado.agregarCliente(cliente3);
+        supermercado.agregarCliente(cliente4);
 
         int opcion;
         do {
@@ -150,44 +160,91 @@ public class Aplicacion {
                     JOptionPane.showMessageDialog(null, "--------- Registrar Compra ---------");
 
                     String docClienteCompra = JOptionPane.showInputDialog("Documento del cliente:");
-                    Cliente cliCompra = supermercado.buscarCliente(docClienteCompra);
+                    if (docClienteCompra == null) break; // usuario canceló
 
+                    Cliente cliCompra = supermercado.buscarCliente(docClienteCompra);
                     if (cliCompra == null) {
                         JOptionPane.showMessageDialog(null, "Cliente no encontrado. Debe registrarlo primero.");
                         break;
                     }
 
-                    String codProdCompra = JOptionPane.showInputDialog("Código del producto a comprar:");
-                    Producto prodCompra = supermercado.buscarProducto(codProdCompra);
+                    // Listas para ir acumulando TODOS los productos de esta compra
+                    List<Producto> prods = new ArrayList<>();
+                    List<Integer> cants = new ArrayList<>();
 
-                    if (prodCompra == null) {
-                        JOptionPane.showMessageDialog(null, "Producto no encontrado.");
+                    boolean seguirAgregando = true;
+                    while (seguirAgregando) {
+                        String codProdCompra = JOptionPane.showInputDialog("Código del producto a comprar:");
+                        if (codProdCompra == null) break; // canceló, se detiene de agregar más
+
+                        Producto prodCompra = supermercado.buscarProducto(codProdCompra);
+                        if (prodCompra == null) {
+                            JOptionPane.showMessageDialog(null, "Producto no encontrado.");
+                            continue; // vuelve a preguntar sin salir del ciclo
+                        }
+
+                        String cantStr = JOptionPane.showInputDialog("Cantidad de \"" + prodCompra.getNombre() + "\" a comprar:");
+                        if (cantStr == null) break;
+
+                        int cantCompra;
+                        try {
+                            cantCompra = Integer.parseInt(cantStr);
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Cantidad inválida, debe ser un número entero.");
+                            continue;
+                        }
+
+                        if (cantCompra <= 0) {
+                            JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a 0.");
+                            continue;
+                        }
+
+                        if (!prodCompra.hayDisponibilidad(cantCompra)) {
+                            JOptionPane.showMessageDialog(null, "No hay suficiente stock de \"" + prodCompra.getNombre() + "\".");
+                            continue;
+                        }
+
+                        prods.add(prodCompra);
+                        cants.add(cantCompra);
+
+                        int otraOpcion = JOptionPane.showConfirmDialog(null, "¿Agregar otro producto a esta compra?",
+                                "Agregar más", JOptionPane.YES_NO_OPTION);
+                        seguirAgregando = (otraOpcion == JOptionPane.YES_OPTION);
+                    }
+
+                    if (prods.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "No se agregó ningún producto. Compra cancelada.");
                         break;
                     }
 
-                    int cantCompra = Integer.parseInt(JOptionPane.showInputDialog("Cantidad a comprar:"));
                     String metStr = JOptionPane.showInputDialog("Método de pago (EFECTIVO, TARJETA, TRANSFERENCIA):");
-                    MetodoPago metodoPago = MetodoPago.valueOf(metStr.toUpperCase());
+                    if (metStr == null) break;
 
-                    // Se arman las listas simples para llamar al método de negocio
-                    List<Producto> prods = new ArrayList<>();
-                    prods.add(prodCompra);
-                    List<Integer> cants = new ArrayList<>();
-                    cants.add(cantCompra);
+                    MetodoPago metodoPago;
+                    try {
+                        metodoPago = MetodoPago.valueOf(metStr.trim().toUpperCase());
+                    } catch (IllegalArgumentException e) {
+                        JOptionPane.showMessageDialog(null, "Método de pago inválido.");
+                        break;
+                    }
 
                     String codFactura = "FAC-" + (supermercado.getListaFacturas().size() + 1);
 
                     Factura factura = supermercado.registrarCompra(cliCompra, codFactura, LocalDate.now(), metodoPago, prods, cants);
 
                     if (factura != null) {
-                        JOptionPane.showMessageDialog(null, "¡Compra registrada exitosamente!\n" +
+                        String resumen = "¡Compra registrada exitosamente!\n" +
                                 "Código Factura: " + factura.getCodigoCompra() + "\n" +
-                                "Total a pagar: $" + factura.getValorTotal());
+                                "Productos comprados:\n";
+                        for (int i = 0; i < prods.size(); i++) {
+                            resumen += " - " + prods.get(i).getNombre() + " x" + cants.get(i) + "\n";
+                        }
+                        resumen += "Total a pagar: $" + factura.getValorTotal();
+                        JOptionPane.showMessageDialog(null, resumen);
                     } else {
                         JOptionPane.showMessageDialog(null, "Error al registrar compra (verifique disponibilidad de stock).");
                     }
                     break;
-
                 case 8:
                     JOptionPane.showMessageDialog(null, "--------- Consultar Compras de un Cliente ---------");
 
