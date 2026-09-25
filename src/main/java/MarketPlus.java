@@ -190,7 +190,6 @@ public class MarketPlus {
     // METODOS DE NEGOCIO
     public Factura registrarCompra(Cliente cliente, String codigoCompra, LocalDate fechaRealizacion,
                                    MetodoPago metodoPago, List<Producto> productos, List<Integer> cantidades) {
-        // Cada producto valida su propia cantidad disponible.
         for (int i = 0; i < productos.size(); i++) {
             Producto producto = productos.get(i);
             int cantidadPedida = cantidades.get(i);
